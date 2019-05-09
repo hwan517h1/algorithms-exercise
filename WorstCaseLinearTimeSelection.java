@@ -1,5 +1,6 @@
 // 최악의 경우에도 선형 시간을 보장하는 선택 알고리즘(The linear-time selection algorithm in the worst case) 
 public class WorstCaseLinearTimeSelection {
+    
     public static void main(String args[]) {
         int[] a = { 
             10, 9, 8, 7, 6, 5, 4, 3, 2, 1,
@@ -53,12 +54,10 @@ public class WorstCaseLinearTimeSelection {
         return index;
     }
 
-    private static int[] swap(int[] a, int i, int j) {
+    private static void swap(int[] a, int i, int j) {
         int tmp = a[i - 1];
         a[i - 1] = a[j - 1];
         a[j - 1] = tmp;
-
-        return a;
     }
 
     private static int partition(int[] a, int p, int r) {
