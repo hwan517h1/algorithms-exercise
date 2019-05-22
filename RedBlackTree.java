@@ -1,15 +1,15 @@
-class Node {
+class Node1 {
     // Basic red-black tree
     public int key;
     public int color;
-    public Node parent;
-    public Node left;
-    public Node right;
+    public Node1 parent;
+    public Node1 left;
+    public Node1 right;
 
     // using for select(), rank() in Order statistics tree
     public int size;
 
-    public Node(int key, int color, int size, Node parent, Node left, Node right) {
+    public Node1(int key, int color, int size, Node1 parent, Node1 left, Node1 right) {
         this.key = key;
         this.color = color;
         this.size = size;
@@ -19,20 +19,20 @@ class Node {
     }
 }
 
-class Tree {
-    public Node root;
-    public Node nil;
+class Tree1 {
+    public Node1 root;
+    public Node1 nil;
 
     public static final int BLACK = 1;
     public static final int RED = 2;
 
-    public Tree(Node root, Node nil) {
+    public Tree1(Node1 root, Node1 nil) {
         this.root = root;
         this.nil = nil;
     }
 
-    public Node find(Tree T, int i) {
-        Node x = T.root;
+    public Node1 find(Tree1 T, int i) {
+        Node1 x = T.root;
 
         while (x != T.nil) {
             if(i == x.key) { return x; } // 해당 key를 가진 node가 존재함
@@ -43,8 +43,8 @@ class Tree {
         return null; // 해당 key를 가진 node가 존재하지 않음
     }
 
-    public void rotateLeft(Tree T, Node x) { // a == x.left, y == x.right, b == y.left, c == y.right 경우
-        Node y = x.right;
+    public void rotateLeft(Tree1 T, Node1 x) { // a == x.left, y == x.right, b == y.left, c == y.right 경우
+        Node1 y = x.right;
 
         x.right = y.left; // x.right = b(부모 입장)
         if (y.left != T.nil) { y.left.parent = x; } // x.right = b(자식 입장)
@@ -61,8 +61,8 @@ class Tree {
         x.size = x.left.size + x.right.size + 1; // x와 y의 size 정리 2
     }
 
-    public void rotateRight(Tree T, Node y) { // a == x.left, b == x.right, x == y.left, c == y.right 경우
-        Node x = y.left;
+    public void rotateRight(Tree1 T, Node1 y) { // a == x.left, b == x.right, x == y.left, c == y.right 경우
+        Node1 x = y.left;
 
         y.left = x.right; // y.left = b(부모 입장)
         if (x.right != T.nil) { x.right.parent = y; } // y.left = b(자식 입장)
@@ -79,9 +79,9 @@ class Tree {
         y.size = y.left.size + y.right.size + 1; // x와 y의 size 정리 2
     }
 
-    public int insert(Tree T, Node n) {
-        Node x = T.root;
-        Node p = T.nil;
+    public int insert(Tree1 T, Node1 n) {
+        Node1 x = T.root;
+        Node1 p = T.nil;
         while (x != T.nil) { // key 따라 n 삽입 위치 탐색
             p = x;
             x.size++; // size 증가
@@ -107,10 +107,10 @@ class Tree {
         return n.key;
     }
 
-    public void fixUpInsertion(Tree T, Node x) {
+    public void fixUpInsertion(Tree1 T, Node1 x) {
         while (x.parent.color == RED) { // RED node 연속 오류 해결
             if (x.parent == x.parent.parent.left) {
-                Node u = x.parent.parent.right; // x의 삼촌
+                Node1 u = x.parent.parent.right; // x의 삼촌
                 if (u.color == RED) {
                     x.parent.color = BLACK;
                     u.color = BLACK;
@@ -130,7 +130,7 @@ class Tree {
                     rotateRight(T, x.parent.parent);
                 }
             } else {
-                Node u = x.parent.parent.left;
+                Node1 u = x.parent.parent.left;
                 if (u.color == RED) {
                     x.parent.color = BLACK;
                     u.color = BLACK;
@@ -155,7 +155,7 @@ class Tree {
         T.root.color = BLACK;
     }
 
-    public void transplant(Tree T, Node d, Node t) { // Subtree 교체(d 삭제 후 t 이식)
+    public void transplant(Tree1 T, Node1 d, Node1 t) { // Subtree 교체(d 삭제 후 t 이식)
         if (d.parent == T.nil) { T.root = t; } // 부모 입장
         else if (d == d.parent.left) { d.parent.left = t; }
         else { d.parent.right = t; }
@@ -163,17 +163,17 @@ class Tree {
         t.parent = d.parent; // 자식 입장
     }
 
-    public Node findMinimum(Tree T, Node n) { // Swap with the minimum of right subtree
-        Node x = n;
+    public Node1 findMinimum(Tree1 T, Node1 n) { // Swap with the minimum of right subtree
+        Node1 x = n;
 
         while (x.left != T.nil) { x = x.left; }
 
         return x;
     }
 
-    public int delete(Tree T, Node z) {
-        Node x;
-        Node y = z;
+    public int delete(Tree1 T, Node1 z) {
+        Node1 x;
+        Node1 y = z;
         int yOriginalColor = y.color;
 
         if (z.left == T.nil) {
@@ -202,7 +202,7 @@ class Tree {
 
         y.size = z.size;
 
-        Node tmp = x;
+        Node1 tmp = x;
         while (tmp != T.root) {
             tmp = tmp.parent;
             tmp.size--;
@@ -213,10 +213,10 @@ class Tree {
         return z.key;
     }
 
-    public void fixUpDeletion(Tree T, Node x) {
+    public void fixUpDeletion(Tree1 T, Node1 x) {
         while ((x != T.root) && (x.color == BLACK)) {
             if (x == x.parent.left) {
-                Node w = x.parent.right;
+                Node1 w = x.parent.right;
                 if (w.color == RED) {
                     w.color = BLACK;
                     x.parent.color = RED;
@@ -240,7 +240,7 @@ class Tree {
                     x = T.root;
                 }
             } else {
-                Node w = x.parent.left;
+                Node1 w = x.parent.left;
                 if (w.color == RED) {
                     w.color = BLACK;
                     x.parent.color = RED;
@@ -268,7 +268,7 @@ class Tree {
         x.color = BLACK;
     }
 
-    public Node select(Node x, int i) {
+    public Node1 select(Node1 x, int i) {
         int rank = x.left.size + 1;
 
         if (i == rank) { return x; }
@@ -276,9 +276,9 @@ class Tree {
         else { return select(x.right, i - rank); }
     }
 
-    public int rank(Tree T, Node n) {
+    public int rank(Tree1 T, Node1 n) {
         int rank = n.left.size + 1;
-        Node p = n;
+        Node1 p = n;
 
         while (p != T.root) {
             if (p == p.parent.right) { rank = rank + p.parent.left.size + 1; }
@@ -288,7 +288,7 @@ class Tree {
         return rank;
     }
 
-    public void print(Tree T, Node x) { // In-order traversal(중위 순회)
+    public void print(Tree1 T, Node1 x) { // In-order traversal(중위 순회)
         if (x == nil) {
             System.out.println("(Empty)");
 
@@ -307,15 +307,15 @@ class Tree {
 
 
 public class RedBlackTree {
-    public static Node nil;
-    public static Tree tree;
+    public static Node1 nil;
+    public static Tree1 tree;
 
     public static final int BLACK = 1;
     public static final int RED = 2;
 
     public static void main(String[] args) {
-        nil = new Node(0, 1, 0, nil, nil, nil);
-        tree = new Tree(nil, nil); // Empty tree
+        nil = new Node1(0, 1, 0, nil, nil, nil);
+        tree = new Tree1(nil, nil); // Empty tree
 
         init();
         delete(1);
@@ -338,16 +338,16 @@ public class RedBlackTree {
     }
 
     public static void init() {
-        nil = new Node(0, 1, 0, nil, nil, nil);
+        nil = new Node1(0, 1, 0, nil, nil, nil);
 
-        tree = new Tree(nil, nil); // Empty tree
+        tree = new Tree1(nil, nil); // Empty tree
     }
 
     public static int insert(int x) {
         if (x < 1) {
             return 0;
         } else if (tree.find(tree, x) == null) {
-            Node n = new Node(x, 2, 1, nil, nil, nil);
+            Node1 n = new Node1(x, 2, 1, nil, nil, nil);
 
             return tree.insert(tree, n);
         } else {
@@ -356,7 +356,7 @@ public class RedBlackTree {
     }
 
     public static int delete(int x) {
-        Node n = tree.find(tree, x);
+        Node1 n = tree.find(tree, x);
 
         if (n == null) {
             return 0;
@@ -378,7 +378,7 @@ public class RedBlackTree {
     }
 
     public static void rank(int x) {
-        Node n = tree.find(tree, x);
+        Node1 n = tree.find(tree, x);
 
         if (n == null) {
             System.out.println("Error in rank");
