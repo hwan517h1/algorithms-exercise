@@ -50,3 +50,9 @@ public class Baekjoon11053 {
         return maxValue;
     }
 }
+
+/*
+     A: 1   2   10  7   4   5   8   9
+LENGTH: 1   2   3   3   3   4   5   6
+   해설: A의 i번째 값보다 작은 수의 LENGTH 중 가장 큰 값 + 1 = LENGTH의 i번째 값
+ */
