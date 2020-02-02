@@ -1,5 +1,5 @@
 import java.util.Scanner;
-        import java.util.Stack;
+import java.util.Stack;
 
 public class Baekjoon7576 {
     private static int[][] matrix = null;
